@@ -14,10 +14,13 @@ output:
 I am interested in exploring data related to voting in this year's Wisconsin Senate election. I want to look at it this year especially because of the concurrent Presidential election. I wonder if there are some interesting effects of the bigger, national election happening at the same time.
 
 ## Proposal Paragraph
-https://www.kaggle.com/datasets/neelgajare/liberals-vs-conservatives-on-reddit-13000-posts 
+https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14
+https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020
   (I am moving away from my thoughts above) 
   
-  Does the forum app, Reddit, give voice to more conservative or liberal viewpoints? This guiding research question was inspired by the huge role that non-traditional media sources play in politics today. As the American monolithic news culture has died, these non-traditional have become key in informing millions Americans on the political scene. I expect that conservative viewpoints would be more popular on Reddit. This hypothesis is based on the flourishing of 'fake news' rhetoric among conservatives and conservative candidates. My explanatory variables would be overall number of posts for each of the ideologies (conservatives and liberal), how many 'up votes' each post received, number of comments, etc. By gathering averages and separating data points to compare and contrast, I believe that I will be able to clearly observe whether there is a tilt towards one ideology. 'Up votes' and total number of posts for each viewpoint will be my variables of interest. The data has each row categorized by 'up votes', and I am sure I can code conservative=1/liberal=0 (or vice versa) to separate the post types and add up the total number. If I observe that the most posts/most popular posts advocate for a conservative viewpoint my hypothesis will be proven. If I observe that liberal posts are more in number and popularity my hypothesis will be disproven.
+  Does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's total GDP? I hypothesize that the greater amount of gross funding that is put towards education, the greater a state's GDP. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. My explanatory value is the amount of money each state's total school revenue. My outcome value is the total GDP for each state. If I find that greater funding for schools is accompanied by greater GDP for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state's funding for schools, then my hypothesis will be disproven. When I run a regression of a state's GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.
+  
+ 
   
   
   
