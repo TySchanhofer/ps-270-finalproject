@@ -29,7 +29,7 @@ library(ggplot2)
   
 Step 1. Load in Data
 ```{r}
-gdp <- read_csv("data/bea-gdp-by-state.csv")
+revenue <- read_csv("data/u-s-public-school-system-finances-esec14")
 ```
 
   
