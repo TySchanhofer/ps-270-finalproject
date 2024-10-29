@@ -20,10 +20,18 @@ https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020
   
   Does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's total GDP? I hypothesize that the greater amount of gross funding that is put towards education, the greater a state's GDP. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. My explanatory value is the amount of money each state's total school revenue. My outcome value is the total GDP for each state. If I find that greater funding for schools is accompanied by greater GDP for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state's funding for schools, then my hypothesis will be disproven. When I run a regression of a state's GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.
   
- 
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
   
-  
-  
+Step 1. Load in Data
+```{r}
+gdp <- read_csv("data/bea-gdp-by-state.csv")
+```
+
   
   
   
