@@ -30,13 +30,10 @@ library(ggplot2)
 Step 1. Load in Data
 ```{r}
 revenue <- read.csv("elsec14.csv")
+gdp <- read.csv("bea-gdp-by-state.csv")
 
-revenue
+gdp
 ```
 
-  
-
-
-  
   
   
