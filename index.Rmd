@@ -29,11 +29,14 @@ library(ggplot2)
   
 Step 1. Load in Data
 ```{r}
-revenue <- read_csv("data/u-s-public-school-system-finances-esec14")
+revenue <- read.csv("elsec14.csv")
+
+revenue
 ```
 
   
-  
+
+
   
   
   
