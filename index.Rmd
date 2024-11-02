@@ -29,9 +29,39 @@ library(ggplot2)
   
 ##Data Upload
 ```{r}
-revenue <- read.csv("elsec14.csv")
-gdp <- read.csv("bea-gdp-by-state.csv")
+rawrevenue <- read.csv("elsec14.csv")
+rawgdp <- read.csv("bea-gdp-by-state.csv")
+rawgdp
 ```
 
-  
+##Data Cleaning
+```{r}
+revenue <- rawrevenue |>
+  select(index, STATE, NAME, YRDATA, TOTALREV)
+
+state_revenue <- revenue |>
+  group_by(STATE) |>
+  summarize(gross_state_rev = sum(TOTALREV, na.rm = TRUE))
+
+revenue <- revenue |>
+  left_join(state_revenue, by = "STATE")
+
+revenue
+```
+```{r}
+gdp <- rawgdp |>
+  select(Fips, Area, X2017)
+gdp
+```
+
+Next steps for cleaning. Joining data. Go to office hours.
+
+##Graphs
+
+```{r}
+ggplot(data = gdp,
+       mapping = aes(x = X2017)) +
+geom_histogram()
+```
+
   
