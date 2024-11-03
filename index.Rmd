@@ -12,7 +12,6 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to voting in this year's Wisconsin Senate election. I want to look at it this year especially because of the concurrent Presidential election. I wonder if there are some interesting effects of the bigger, national election happening at the same time.
-
 ## Proposal Paragraph
 https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14
 https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020
