@@ -31,7 +31,6 @@ library(ggplot2)
 ```{r}
 rawrevenue <- read.csv("elsec14.csv")
 rawgdp <- read.csv("bea-gdp-by-state.csv")
-rawgdp
 ```
 
 ##Data Cleaning
@@ -46,13 +45,12 @@ state_revenue <- revenue |>
 revenue <- revenue |>
   left_join(state_revenue, by = "STATE")
 
-revenue
 ```
+
 
 ```{r}
 gdp <- rawgdp |>
   select(Fips, Area, X2017)
-gdp
 ```
 
 Next steps for cleaning. Joining data. Go to office hours.
