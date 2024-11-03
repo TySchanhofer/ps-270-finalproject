@@ -48,6 +48,7 @@ revenue <- revenue |>
 
 revenue
 ```
+
 ```{r}
 gdp <- rawgdp |>
   select(Fips, Area, X2017)
@@ -61,7 +62,25 @@ Next steps for cleaning. Joining data. Go to office hours.
 ```{r}
 ggplot(data = gdp,
        mapping = aes(x = X2017)) +
-geom_histogram()
+geom_histogram() +
+  labs(title = "GDP per Capita Across the US")
 ```
+
+```{r}
+ggplot(data = revenue,
+       mapping = aes(x = gross_state_rev)) +
+geom_histogram() +
+  labs(title = "School Spending by State")
+```
+
+note for later: fix scaling!
+
+
+
+
+
+
+
+
 
   
