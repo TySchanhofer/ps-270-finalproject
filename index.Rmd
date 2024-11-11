@@ -30,6 +30,17 @@ library(ggplot2)
 ```{r}
 rawrevenue <- read.csv("elsec14.csv")
 rawgdp <- read.csv("bea-gdp-by-state.csv")
+
+
+
+
+RAWUSErevenue <- read.csv("ELSI_csv_export_finance.csv")
+
+
+USErevenue <- RAWUSErevenue |>
+  select(State.Name, Total.Revenues..TR..per.Pupil..MEMBR...State.Finance..2016.17
+)
+USErevenue
 ```
 
 ##Data Cleaning
@@ -44,12 +55,17 @@ state_revenue <- revenue |>
 revenue <- revenue |>
   left_join(state_revenue, by = "STATE")
 
+joinpiece <- read_csv("RevenueCodewFIP.csv")
+
+joinpiece
 ```
 
 
 ```{r}
 gdp <- rawgdp |>
   select(Fips, Area, X2017)
+
+gdp
 ```
 
 Next steps for cleaning. Joining data. Go to office hours.
@@ -75,6 +91,31 @@ note for later: fix scaling!
 
 
 
+
+
+
+
+
+
+THIS IS WHAT I NEED TO FIGURE OUT
+```{r}
+schools <- read_csv("data/ELSI_csv_export_finance2.csv")
+
+schools
+```
+
+
+```{r}
+gdp
+```
+
+
+
+```{r}
+complete_data <- left_join(gdp, USErevenue, by = c("Area" = "State.Name"))
+
+complete_data
+```
 
 
 
