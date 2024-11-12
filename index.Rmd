@@ -17,7 +17,7 @@ https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-
 https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020
   (I am moving away from my thoughts above) 
   
-  Does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's total GDP? I hypothesize that the greater amount of gross funding that is put towards education, the greater a state's GDP. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. My explanatory value is the amount of money each state's total school revenue. My outcome value is the total GDP for each state. If I find that greater funding for schools is accompanied by greater GDP for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state's funding for schools, then my hypothesis will be disproven. When I run a regression of a state's GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.
+  Does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's GDP per capita? I hypothesize that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. Additionally, I believe these states will also attract high earners from elsewhere, which would also raise the GDP per capita. My explanatory value is the amount of money each state spends per student. My outcome value is the GDP per capita for each state. If I find that greater funding for schools per student is accompanied by greater GDP per capita for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state's funding for schools, then my hypothesis will be disproven. When I run a regression of a state's GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.
   
 
 ```{r}
@@ -28,78 +28,35 @@ library(ggplot2)
   
 ##Data Upload
 ```{r}
-rawrevenue <- read.csv("elsec14.csv")
-rawgdp <- read.csv("bea-gdp-by-state.csv")
-
-
-
-
-RAWUSErevenue <- read.csv("ELSI_csv_export_finance.csv")
-
-
-USErevenue <- RAWUSErevenue |>
-  select(State.Name, Total.Revenues..TR..per.Pupil..MEMBR...State.Finance..2016.17
-)
-USErevenue
+rawgdp <- read_csv("data/bea-gdp-by-state.csv")
+rawschools <- read_csv("data/ELSI_csv_export_finance2.csv")
 ```
 
 ##Data Cleaning
-```{r}
-revenue <- rawrevenue |>
-  select(index, STATE, NAME, YRDATA, TOTALREV)
-
-state_revenue <- revenue |>
-  group_by(STATE) |>
-  summarize(gross_state_rev = sum(TOTALREV, na.rm = TRUE))
-
-revenue <- revenue |>
-  left_join(state_revenue, by = "STATE")
-
-joinpiece <- read_csv("RevenueCodewFIP.csv")
-
-joinpiece
-```
-
 
 ```{r}
 gdp <- rawgdp |>
-  select(Fips, Area, X2017)
+  select(Fips, Area, "2017")
 
 gdp
 ```
 
-Next steps for cleaning. Joining data. Go to office hours.
+
 
 ##Graphs
 
 ```{r}
 ggplot(data = gdp,
-       mapping = aes(x = X2017)) +
+       mapping = aes(x = `2017`)) +
 geom_histogram() +
   labs(title = "GDP per Capita Across the US")
 ```
 
+
+
 ```{r}
-ggplot(data = revenue,
-       mapping = aes(x = gross_state_rev)) +
-geom_histogram() +
-  labs(title = "School Spending by State")
-```
-
-note for later: fix scaling!
-
-
-
-
-
-
-
-
-
-
-THIS IS WHAT I NEED TO FIGURE OUT
-```{r}
-schools <- read_csv("data/ELSI_csv_export_finance2.csv")
+schools <- rawschools |>
+  select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")
 
 schools
 ```
@@ -107,14 +64,6 @@ schools
 
 ```{r}
 gdp
-```
-
-
-
-```{r}
-complete_data <- left_join(gdp, USErevenue, by = c("Area" = "State.Name"))
-
-complete_data
 ```
 
 
