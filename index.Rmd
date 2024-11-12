@@ -62,11 +62,15 @@ schools
 ```
 
 
+
+
+
+## Combine
 ```{r}
-gdp
+gdp_schools <- left_join(gdp, schools, by = "Area")
+
+gdp_schools
 ```
-
-
 
 
 
