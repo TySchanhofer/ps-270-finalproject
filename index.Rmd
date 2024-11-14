@@ -26,13 +26,13 @@ library(ggplot2)
 ```
 
   
-##Data Upload
+## Data Upload
 ```{r}
 rawgdp <- read_csv("data/bea-gdp-by-state.csv")
 rawschools <- read_csv("data/ELSI_csv_export_finance2.csv")
 ```
 
-##Data Cleaning
+## Data Cleaning
 
 ```{r}
 gdp <- rawgdp |>
@@ -40,10 +40,15 @@ gdp <- rawgdp |>
 
 gdp
 ```
+```{r}
+schools <- rawschools |>
+  select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")
+
+schools
+```
 
 
-
-##Graphs
+## Initial Graph
 
 ```{r}
 ggplot(data = gdp,
@@ -54,23 +59,31 @@ geom_histogram() +
 
 
 
-```{r}
-schools <- rawschools |>
-  select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")
 
-schools
-```
-
-
-
-
-
-## Combine
+## Combining the Datasets
 ```{r}
 gdp_schools <- left_join(gdp, schools, by = "Area")
 
 gdp_schools
 ```
+
+## Combined Graph
+
+```{r}
+graph_1 <- ggplot(data = gdp_schools,
+       aes(x = `2017`,
+           y = `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`)) +
+  geom_point(size = 2.25, color = "dodgerblue") +
+  geom_smooth(method = "lm", color = "blue") +
+  labs(x = "GDP per Capita (by state)",
+       y = "Dollars Spent per Student (by state)",
+       title = "GDP and Education Spending",
+       subtitle = "Among U.S. States and the District of Columbia",
+       caption = "Sources: National Center for Education Statisitcs and the Bureau of Economic Analysis")
+
+graph_1
+```
+
 
 
 
