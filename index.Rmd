@@ -67,7 +67,7 @@ gdp_schools <- left_join(gdp, schools, by = "Area")
 gdp_schools
 ```
 
-## Combined Graph
+## Analysis Graph
 
 ```{r}
 graph_1 <- ggplot(data = gdp_schools,
@@ -85,7 +85,7 @@ graph_1 <- ggplot(data = gdp_schools,
 graph_1
 ```
 
-
+This first combined graph has shown some promising results with regard to my hypothesis. I guessed that as a state's educational funding (shown here through the amount of dollars spent per student), its GDP per capita would rise as well. This graph that combines public school funding information from National Center for Educational Statistics and income information from the Bureau of Economic Analysis, begins to show that there seems to be a correlation between the two factors.
 
 
   
