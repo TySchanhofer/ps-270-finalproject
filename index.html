@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["bea-gdp-by-state.csv","elsec14.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.28/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/bea-gdp-by-state.csv","data/ELSI_csv_export_finance2.csv","elsec14.csv","ELSI_csv_export_finance.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/ELSI_csv_export_financeFINAL.csv","index_files/ELSI_csv_export_financeUPDATED.numbers","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.28/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1544,67 +1544,125 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
-<p>I am interested in exploring data related to voting in this year’s Wisconsin Senate election. I want to look at it this year especially because of the concurrent Presidential election. I wonder if there are some interesting effects of the bigger, national election happening at the same time.</p>
-<h2 id="proposal-paragraph">Proposal Paragraph</h2>
-<p><a href="https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14" class="uri">https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14</a>
+<p>I am interested in exploring data related to voting in this year’s Wisconsin Senate election. I want to look at it this year especially because of the concurrent Presidential election. I wonder if there are some interesting effects of the bigger, national election happening at the same time.
+## Proposal Paragraph
+<a href="https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14" class="uri">https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14</a>
 <a href="https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020" class="uri">https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020</a>
 (I am moving away from my thoughts above)</p>
-<p>Does funding for an American state’s elementary, middle, and high schools have correlation/a causal relationship with a state’s total GDP? I hypothesize that the greater amount of gross funding that is put towards education, the greater a state’s GDP. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. My explanatory value is the amount of money each state’s total school revenue. My outcome value is the total GDP for each state. If I find that greater funding for schools is accompanied by greater GDP for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state’s funding for schools, then my hypothesis will be disproven. When I run a regression of a state’s GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.</p>
+<p>Does funding for an American state’s elementary, middle, and high schools have correlation/a causal relationship with a state’s GDP per capita? I hypothesize that the greater amount of funding per student that is put towards education, the greater a state’s GDP per capita. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. Additionally, I believe these states will also attract high earners from elsewhere, which would also raise the GDP per capita. My explanatory value is the amount of money each state spends per student. My outcome value is the GDP per capita for each state. If I find that greater funding for schools per student is accompanied by greater GDP per capita for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state’s funding for schools, then my hypothesis will be disproven. When I run a regression of a state’s GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-##Data Upload
+<h2 id="data-upload">Data Upload</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rawrevenue</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"elsec14.csv"</span><span class='op'>)</span></span>
-<span><span class='va'>rawgdp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='st'>"bea-gdp-by-state.csv"</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>rawgdp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/bea-gdp-by-state.csv"</span><span class='op'>)</span></span>
+<span><span class='va'>rawschools</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/ELSI_csv_export_finance2.csv"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-##Data Cleaning
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>revenue</span> <span class='op'>&lt;-</span> <span class='va'>rawrevenue</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>index</span>, <span class='va'>STATE</span>, <span class='va'>NAME</span>, <span class='va'>YRDATA</span>, <span class='va'>TOTALREV</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>state_revenue</span> <span class='op'>&lt;-</span> <span class='va'>revenue</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>STATE</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>gross_state_rev <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>TOTALREV</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>revenue</span> <span class='op'>&lt;-</span> <span class='va'>revenue</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>state_revenue</span>, by <span class='op'>=</span> <span class='st'>"STATE"</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
+<h2 id="data-cleaning">Data Cleaning</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp</span> <span class='op'>&lt;-</span> <span class='va'>rawgdp</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Fips</span>, <span class='va'>Area</span>, <span class='va'>X2017</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Fips</span>, <span class='va'>Area</span>, <span class='st'>"2017"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp</span></span></code></pre>
 </div>
+<pre><code># A tibble: 60 × 3
+    Fips Area                 `2017`
+   &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;
+ 1     0 United States         51337
+ 2  1000 Alabama               37508
+ 3  2000 Alaska                63610
+ 4  4000 Arizona               39583
+ 5  5000 Arkansas              36714
+ 6  6000 California            60359
+ 7  8000 Colorado              54026
+ 8  9000 Connecticut           62633
+ 9 10000 Delaware              63955
+10 11000 District of Columbia 159607
+# ℹ 50 more rows</code></pre>
 </div>
-<p>Next steps for cleaning. Joining data. Go to office hours.</p>
-<p>##Graphs</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>schools</span> <span class='op'>&lt;-</span> <span class='va'>rawschools</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='st'>"Area"</span>, <span class='st'>"Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>schools</span></span></code></pre>
+</div>
+<pre><code># A tibble: 51 × 2
+   Area                 Total Revenues (TR) per Pupil (MEMBR) [State…¹
+   &lt;chr&gt;                                                         &lt;dbl&gt;
+ 1 Alabama                                                       10590
+ 2 Alaska                                                        18897
+ 3 Arizona                                                        9214
+ 4 Arkansas                                                      11388
+ 5 California                                                    13965
+ 6 Colorado                                                      11713
+ 7 Connecticut                                                   21647
+ 8 Delaware                                                      20035
+ 9 District of Columbia                                          29425
+10 Florida                                                       10227
+# ℹ 41 more rows
+# ℹ abbreviated name:
+#   ¹​`Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`</code></pre>
+</div>
+<h2 id="initial-graph">Initial Graph</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>gdp</span>,</span>
-<span>       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>X2017</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>`2017`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"GDP per Capita Across the US"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
+<h2 id="combining-the-datasets">Combining the Datasets</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>revenue</span>,</span>
-<span>       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>gross_state_rev</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"School Spending by State"</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_schools</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>gdp</span>, <span class='va'>schools</span>, by <span class='op'>=</span> <span class='st'>"Area"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>gdp_schools</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+<pre><code># A tibble: 60 × 4
+    Fips Area                 `2017` Total Revenues (TR) per Pupil (…¹
+   &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt;                             &lt;dbl&gt;
+ 1     0 United States         51337                                NA
+ 2  1000 Alabama               37508                             10590
+ 3  2000 Alaska                63610                             18897
+ 4  4000 Arizona               39583                              9214
+ 5  5000 Arkansas              36714                             11388
+ 6  6000 California            60359                             13965
+ 7  8000 Colorado              54026                             11713
+ 8  9000 Connecticut           62633                             21647
+ 9 10000 Delaware              63955                             20035
+10 11000 District of Columbia 159607                             29425
+# ℹ 50 more rows
+# ℹ abbreviated name:
+#   ¹​`Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`</code></pre>
 </div>
-<p>note for later: fix scaling!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="combined-graph">Combined Graph</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>graph_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>gdp_schools</span>,</span>
+<span>       <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>`2017`</span>,</span>
+<span>           y <span class='op'>=</span> <span class='va'>`Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2.25</span>, color <span class='op'>=</span> <span class='st'>"dodgerblue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"GDP per Capita (by state)"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Dollars Spent per Student (by state)"</span>,</span>
+<span>       title <span class='op'>=</span> <span class='st'>"GDP and Education Spending"</span>,</span>
+<span>       subtitle <span class='op'>=</span> <span class='st'>"Among U.S. States and the District of Columbia"</span>,</span>
+<span>       caption <span class='op'>=</span> <span class='st'>"Sources: National Center for Education Statisitcs and the Bureau of Economic Analysis"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>graph_1</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
