@@ -75,6 +75,7 @@ graph_1 <- ggplot(data = gdp_schools,
            y = `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`)) +
   geom_point(size = 2.25, color = "dodgerblue") +
   geom_smooth(method = "lm", color = "blue") +
+  coord_cartesian(xlim = c(32000, 75000)) +
   labs(x = "GDP per Capita (by state)",
        y = "Dollars Spent per Student (by state)",
        title = "GDP and Education Spending",
