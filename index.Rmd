@@ -96,7 +96,24 @@ fit.student
 
 
 2.927 Rev per pupil = if we increase GDP by `$`1 (check this value), then we can predict rev per pupil goes up $2.927.
-9125 Intercept = if Rev Per Student is `$`0, then we can predict that GDP will be `$`9125
+9125 Intercept = if GDP per cap is `$`0, then we can predict that Rev Per Student will be `$`9125
+
+
+Introduction: describe the research question and main hypothesis; describe why it is important. (1-2 paragraphs) (2pts)
+RQ: Does an increase in spending on schools correlate with an increase in GDP?
+Hypoth: Yes.
+Importance: Can show beneficial impacts of school funding. Shows that high earners are attracted to places with school funding OR that schools that are better funded produce higher earners in their state. It's probably a mix of both if I would have to guess.
+
+Data section: 2-3 paragraphs + plot visualizing main outcome of interest. (3pts). A data section that briefly describes the data source, describes how the key dependent and independent variables are measured (e.g., a survey, statistical model, or expert coding), and also produces a plot that summarizes the dependent variable
+  - Data sources are in Google Doc. Collected via Census Data (schools) and through GDP collection. 
+  - Independent variable (what influences): School funding.  Dependent (what is influenced): GDP per capita.
+
+Results section: plot of main analysis + regression output + 2-3 paragraphs of description and interpretation of the plots and regression (including interpreting the main coefficient of interest and describing if it is statistically significant and if we should interpret it causally). This section could be longer if you choose to include additional analyses. (8pts)
+
+
+
+Conclusion section: 1 paragraph (i) summarizing results and assessing the extent to which you find support for your hypothesis; (ii) describing limitations of the analysis and threats to inference (missing data, confounding, etc), and stating how you could improve your analysis if you had more time/money. (2pts)
+
 
 
 
