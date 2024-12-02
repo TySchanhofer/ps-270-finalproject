@@ -80,12 +80,33 @@ graph_1 <- ggplot(data = gdp_schools,
        y = "Dollars Spent per Student (by state)",
        title = "GDP and Education Spending",
        subtitle = "Among U.S. States and the District of Columbia",
-       caption = "Sources: National Center for Education Statisitcs and the Bureau of Economic Analysis")
+       caption = "Sources: National Center for Education Statisitcs and the Bureau of Economic Analysis") 
 
 graph_1
 ```
 
 This first combined graph has shown some promising results with regard to my hypothesis. I guessed that as a state's educational funding (shown here through the amount of dollars spent per student), its GDP per capita would rise as well. This graph that combines public school funding information from National Center for Educational Statistics and income information from the Bureau of Economic Analysis, begins to show that there seems to be a correlation between the two factors.
+
+
+```{r}
+fit.student <- lm(`2017` ~ `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`, data = gdp_schools)
+fit.student
+```
+
+
+
+2.927 Rev per pupil = if we increase GDP by `$`1 (check this value), then we can predict rev per pupil goes up $2.927.
+9125 Intercept = if Rev Per Student is `$`0, then we can predict that GDP will be `$`9125
+
+
+
+
+
+
+
+
+
+
 
 
   
