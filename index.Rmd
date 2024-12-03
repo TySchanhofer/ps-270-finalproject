@@ -36,13 +36,15 @@ rawschools <- read_csv("data/ELSI_csv_export_finance2.csv")
 
 ```{r}
 gdp <- rawgdp |>
-  select(Fips, Area, "2017")
+  select(Fips, Area, "2017") |>
+  rename("GDP per Capita" = "2017")
 
 gdp
 ```
 ```{r}
 schools <- rawschools |>
-  select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")
+  select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")|>
+  rename("Spending per Student" = `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`)
 
 schools
 ```
@@ -52,7 +54,7 @@ schools
 
 ```{r}
 ggplot(data = gdp,
-       mapping = aes(x = `2017`)) +
+       mapping = aes(x = `GDP per Capita`)) +
 geom_histogram() +
   labs(title = "GDP per Capita Across the US")
 ```
@@ -71,8 +73,8 @@ gdp_schools
 
 ```{r}
 graph_1 <- ggplot(data = gdp_schools,
-       aes(x = `2017`,
-           y = `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`)) +
+       aes(x = `GDP per Capita`,
+           y = `Spending per Student`)) +
   geom_point(size = 2.25, color = "dodgerblue") +
   geom_smooth(method = "lm", color = "blue") +
   coord_cartesian(xlim = c(32000, 75000)) +
@@ -85,18 +87,29 @@ graph_1 <- ggplot(data = gdp_schools,
 graph_1
 ```
 
-This first combined graph has shown some promising results with regard to my hypothesis. I guessed that as a state's educational funding (shown here through the amount of dollars spent per student), its GDP per capita would rise as well. This graph that combines public school funding information from National Center for Educational Statistics and income information from the Bureau of Economic Analysis, begins to show that there seems to be a correlation between the two factors.
+This first combined graph has shown some promising results with regard to my hypothesis. I guessed that as a state's educational funding rises (shown here through the amount of dollars spent per student), its GDP per capita would rise as well. This graph that combines public school funding information from National Center for Educational Statistics and income information from the Bureau of Economic Analysis, begins to show that there seems to be a correlation between the two factors.
 
 
 ```{r}
-fit.student <- lm(`2017` ~ `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`, data = gdp_schools)
-fit.student
+fit.student <- lm(`GDP per Capita` ~ `Spending per Student`, data = gdp_schools)
+fit.student |>
+  summary()
 ```
 
+2.927 Rev per pupil = if we increase school spending (per pupil) by `$`1 (check this value), then we can predict GDP goes up $2.927.
+9125 Intercept = if school spending is `$`0, then we can predict that GDP will be `$`9125
+look at summary
 
 
-2.927 Rev per pupil = if we increase GDP by `$`1 (check this value), then we can predict rev per pupil goes up $2.927.
-9125 Intercept = if GDP per cap is `$`0, then we can predict that Rev Per Student will be `$`9125
+
+
+
+
+
+
+
+
+
 
 
 Introduction: describe the research question and main hypothesis; describe why it is important. (1-2 paragraphs) (2pts)
