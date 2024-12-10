@@ -36,15 +36,12 @@ rawschools <- read_csv("data/ELSI_csv_export_finance2.csv")
 gdp <- rawgdp |>
   select(Fips, Area, "2017") |>
   rename("GDP per Capita" = "2017")
-
-gdp
 ```
 ```{r}
 schools <- rawschools |>
   select("Area", "Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17")|>
   rename("Spending per Student" = `Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`)
 
-schools
 ```
 
 
@@ -54,6 +51,8 @@ schools
   
   The independent variable is a state’s school funding per student. The dependent variable, and my variable of interest, is a state’s GDP per capita. Below, the variable of interest is represented by a bar plot that shows the frequency of GDP values among the 50 states (and the District of Columbia). The bar graph shows a clear clustering of GDP per capita between `$`35,000 to `$`70,000, with the District of Columbia being an outlier at around `$`158,000. 
 HOW ARE THEY MEASURED??
+
+Links: https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14 and https://www.kaggle.com/datasets/solorzano/gdp-per-capita-in-us-states
 
 
 ```{r}
@@ -69,8 +68,6 @@ geom_histogram() +
 ## Analysis
 ```{r}
 gdp_schools <- left_join(gdp, schools, by = "Area")
-
-gdp_schools
 ```
 
 
@@ -116,57 +113,3 @@ fit.student |>
  In conclusion, I believe I've found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by `$`2.93. The second key finding was that the relationship between a state's school funding and that state's GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state's GDP, and the P-Value proves that this impact is not due to chance.
  
  Despite the strong correlation, I believe there certainly are missing values that disallow me from making causal inferences. There most likely are variables that exist that can impact both the X and Y variable, and are not considered in the graphs/statistics, a study cannot be said to be causal. This aptly describes the issue with my dataset. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect can have an impact on a state's GDP and its level of school funding. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data's strong correlation and P-Value. Knowing what I know now, I would really like to add more variables into my dataset. Because of the hyper-focused approach I took to manually piecing my dataset together, I did not have the time to properly address such missing variables. I could improve my results by adding the aforementioned relevant variables.
-  
-
-
-
-
-
-
-
-
-
-
-Introduction: describe the research question and main hypothesis; describe why it is important. (1-2 paragraphs) (2pts)
-  The guiding question for this research project was, does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's GDP per capita? I hypothesized that states that put more money towards educating its students would produce a workforce that is made up of higher earners, which would lead to a higher GDP per capita. This area of research is important because it gives some insight into the importance of education, as it relates to outcomes in a person’s life on the whole. If my hypothesis is proven correct, it could mean that school funding has an impact in improving quality of life (because by virtually all accounts, a person with a stable income is better off than an impoverished person). By bringing attention to this idea, it could lead to a more intense focus for state’s to avoid cutting school budgets or taking other adverse actions that could eventually worsen the lives of state residents across the board.
-
-
-Data section: 2-3 paragraphs + plot visualizing main outcome of interest. (3pts). A data section that briefly describes the data source, describes how the key dependent and independent variables are measured (e.g., a survey, statistical model, or expert coding), and also produces a plot that summarizes the dependent variable
-  - Data sources are in Google Doc. Collected via Census Data (schools) and through GDP collection. 
-  - Independent variable (what influences): School funding.  Dependent (what is influenced): GDP per capita.
-
-Results section: plot of main analysis + regression output + 2-3 paragraphs of description and interpretation of the plots and regression (including interpreting the main coefficient of interest and describing if it is statistically significant and if we should interpret it causally). This section could be longer if you choose to include additional analyses. (8pts)
-
-  Based on the scatter plot graph alone, it is clear that there is a noticeable, positive correlation between the school spending and state GDP per capita variables. While there are a few outliers (especially the Washington D.C. point, which is cropped out of this graph), most points are clustered relatively close to the trendline that has been added to the graph. Just by giving it an eye test, I am starting to feel confident that my hypothesis may be correct, and that school spending may, in fact, be a factor in driving up a state's GDP.
-  After running a regression with the "lm()" function I became more confident yet that my hypothesis did contain some sort of truth. The intercept is about 9125. This means that if school spending per student (the Y-axis) were `$`0, then a state's GDP per capita (the X-axis) could be predicted to be `$`9125. The main coefficient of interest is about 2.93. This means that for each dollar (`$`1) that is put towards school funding per student, the GDP per capita of a state can be predicted to increase by about `$`2.93. This relationship strengthens the claim I make in my hypothesis.
-  Using the "summary()" function, I was able to concretely prove that there was a significance to my graph and argument as a whole. The P-Value was calculated to be 1.153e-09 (or 0.00000000115). Statistical significance, at least for the data we have been analyzing, is achieved when the p-value is below 0.05. So, since the value is far below 0.05, I can say that there is a much higher than 95% chance that the observations documented were due to chance. Based on the P-Value, the data is strongly statistically significant. Additionally, I found the multiple R-squared value to be 0.53. This means that 53% of the variation is explained by school spending.
-  While there is significance and correlation, I am very hesitant to say that there is causality in this graph. While there is a relationship between school spending and GDP per capita, there are so many different explanations and factors that could be influencing both of these variables. First, I cannot be sure that the relationship is opposite to what I have claimed: it may be that GDP per capita is actually driving up school spending. Additionally, there are a ton of potential confounders with these variables. Within a state, there are so many other things (like political parties in power, global politics, geographic location, urban-rural divide, job market, etc., etc.) that contribute greatly to a state's GDP. Using the graph's multiple R-squared value, which is 0.53, this gap in my data is quantified. Only 53% of the variance in the graph attributes school spending to growth in GDP, leaving 47% of the variance susceptible to other variables. It would be short sighted to say that school spending directly causes GDP per capita to rise.
-
-
-Using the graph's multiple R-squared value, which is 0.53, this gap in my data is quantified. Only 53% of the variance in the graph attributes school spending to growth in GDP, leaving 47% of the variance susceptible to other variables.
-IS THIS RIGHT?
-
-
-If there are things that impact Y and X, then it cannot be said to be causal. Omitted variables = violation of exogeneity
-
-
-
-
-
-
-
-Conclusion section: 1 paragraph (i) summarizing results and assessing the extent to which you find support for your hypothesis; (ii) describing limitations of the analysis and threats to inference (missing data, confounding, etc), and stating how you could improve your analysis if you had more time/money. (2pts)
-
-  In conclusion, I believe I've found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by `$`2.93. The second key finding was that the relationship between a state's school funding and that state's GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state's GDP, and the P-Value proves that this impact is not due to chance.
-  While I do not believe that there is room for confounding values within the dataset, there certainly are missing values that disallow me from making causal inferences. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect have an impact on a state's GDP. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data's strong correlation and P-Value.
-  Knowing what I know now, I would really like to add more variables into my dataset.  It is super hyperfocused right now on just these two variables because of the way I manually pieced the dataset together.
-
-
-
-
-
-
-
-
-
-  

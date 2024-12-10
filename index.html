@@ -1564,52 +1564,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp</span> <span class='op'>&lt;-</span> <span class='va'>rawgdp</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>Fips</span>, <span class='va'>Area</span>, <span class='st'>"2017"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"GDP per Capita"</span> <span class='op'>=</span> <span class='st'>"2017"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>gdp</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"GDP per Capita"</span> <span class='op'>=</span> <span class='st'>"2017"</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 60 × 3
-    Fips Area                 `GDP per Capita`
-   &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt;
- 1     0 United States                   51337
- 2  1000 Alabama                         37508
- 3  2000 Alaska                          63610
- 4  4000 Arizona                         39583
- 5  5000 Arkansas                        36714
- 6  6000 California                      60359
- 7  8000 Colorado                        54026
- 8  9000 Connecticut                     62633
- 9 10000 Delaware                        63955
-10 11000 District of Columbia           159607
-# ℹ 50 more rows</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>schools</span> <span class='op'>&lt;-</span> <span class='va'>rawschools</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='st'>"Area"</span>, <span class='st'>"Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17"</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"Spending per Student"</span> <span class='op'>=</span> <span class='va'>`Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>schools</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span><span class='st'>"Spending per Student"</span> <span class='op'>=</span> <span class='va'>`Total Revenues (TR) per Pupil (MEMBR) [State Finance] 2016-17`</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 51 × 2
-   Area                 `Spending per Student`
-   &lt;chr&gt;                                 &lt;dbl&gt;
- 1 Alabama                               10590
- 2 Alaska                                18897
- 3 Arizona                                9214
- 4 Arkansas                              11388
- 5 California                            13965
- 6 Colorado                              11713
- 7 Connecticut                           21647
- 8 Delaware                              20035
- 9 District of Columbia                  29425
-10 Florida                               10227
-# ℹ 41 more rows</code></pre>
 </div>
 <h2 id="data-section">Data Section</h2>
 <p>My sources for this graph are directly from the US government. The data for school spending was compiled by the US Census Bureau. For GDP, I used data compiled from the US Bureau of Economic Analysis; this Bureau uses local, state, and federal data to monitor and release the most reliable data on GDP. Using data from these two reliable, government sources has been very helpful because of the groups’ access to census data and tax records, which allows their numbers to paint a really holistic picture of school spending and GDP variables.</p>
 <p>The independent variable is a state’s school funding per student. The dependent variable, and my variable of interest, is a state’s GDP per capita. Below, the variable of interest is represented by a bar plot that shows the frequency of GDP values among the 50 states (and the District of Columbia). The bar graph shows a clear clustering of GDP per capita between <code>$</code>35,000 to <code>$</code>70,000, with the District of Columbia being an outlier at around <code>$</code>158,000.
 HOW ARE THEY MEASURED??</p>
+<p>Links: <a href="https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14" class="uri">https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14</a> and <a href="https://www.kaggle.com/datasets/solorzano/gdp-per-capita-in-us-states" class="uri">https://www.kaggle.com/datasets/solorzano/gdp-per-capita-in-us-states</a></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>gdp</span>,</span>
@@ -1622,24 +1591,8 @@ HOW ARE THEY MEASURED??</p>
 <h2 id="analysis">Analysis</h2>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_schools</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>gdp</span>, <span class='va'>schools</span>, by <span class='op'>=</span> <span class='st'>"Area"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>gdp_schools</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>gdp_schools</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>gdp</span>, <span class='va'>schools</span>, by <span class='op'>=</span> <span class='st'>"Area"</span><span class='op'>)</span></span></code></pre>
 </div>
-<pre><code># A tibble: 60 × 4
-    Fips Area                 `GDP per Capita` `Spending per Student`
-   &lt;dbl&gt; &lt;chr&gt;                           &lt;dbl&gt;                  &lt;dbl&gt;
- 1     0 United States                   51337                     NA
- 2  1000 Alabama                         37508                  10590
- 3  2000 Alaska                          63610                  18897
- 4  4000 Arizona                         39583                   9214
- 5  5000 Arkansas                        36714                  11388
- 6  6000 California                      60359                  13965
- 7  8000 Colorado                        54026                  11713
- 8  9000 Connecticut                     62633                  21647
- 9 10000 Delaware                        63955                  20035
-10 11000 District of Columbia           159607                  29425
-# ℹ 50 more rows</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1729,24 +1682,7 @@ F-statistic: 56.12 on 1 and 49 DF,  p-value: 1.153e-09</code></pre>
 <h2 id="conclusion">Conclusion</h2>
 <p>In conclusion, I believe I’ve found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state’s GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by <code>$</code>2.93. The second key finding was that the relationship between a state’s school funding and that state’s GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state’s GDP, and the P-Value proves that this impact is not due to chance.</p>
 <p>Despite the strong correlation, I believe there certainly are missing values that disallow me from making causal inferences. There most likely are variables that exist that can impact both the X and Y variable, and are not considered in the graphs/statistics, a study cannot be said to be causal. This aptly describes the issue with my dataset. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect can have an impact on a state’s GDP and its level of school funding. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data’s strong correlation and P-Value. Knowing what I know now, I would really like to add more variables into my dataset. Because of the hyper-focused approach I took to manually piecing my dataset together, I did not have the time to properly address such missing variables. I could improve my results by adding the aforementioned relevant variables.</p>
-<p>Introduction: describe the research question and main hypothesis; describe why it is important. (1-2 paragraphs) (2pts)
-The guiding question for this research project was, does funding for an American state’s elementary, middle, and high schools have correlation/a causal relationship with a state’s GDP per capita? I hypothesized that states that put more money towards educating its students would produce a workforce that is made up of higher earners, which would lead to a higher GDP per capita. This area of research is important because it gives some insight into the importance of education, as it relates to outcomes in a person’s life on the whole. If my hypothesis is proven correct, it could mean that school funding has an impact in improving quality of life (because by virtually all accounts, a person with a stable income is better off than an impoverished person). By bringing attention to this idea, it could lead to a more intense focus for state’s to avoid cutting school budgets or taking other adverse actions that could eventually worsen the lives of state residents across the board.</p>
-<p>Data section: 2-3 paragraphs + plot visualizing main outcome of interest. (3pts). A data section that briefly describes the data source, describes how the key dependent and independent variables are measured (e.g., a survey, statistical model, or expert coding), and also produces a plot that summarizes the dependent variable
-- Data sources are in Google Doc. Collected via Census Data (schools) and through GDP collection.
-- Independent variable (what influences): School funding. Dependent (what is influenced): GDP per capita.</p>
-<p>Results section: plot of main analysis + regression output + 2-3 paragraphs of description and interpretation of the plots and regression (including interpreting the main coefficient of interest and describing if it is statistically significant and if we should interpret it causally). This section could be longer if you choose to include additional analyses. (8pts)</p>
-<p>Based on the scatter plot graph alone, it is clear that there is a noticeable, positive correlation between the school spending and state GDP per capita variables. While there are a few outliers (especially the Washington D.C. point, which is cropped out of this graph), most points are clustered relatively close to the trendline that has been added to the graph. Just by giving it an eye test, I am starting to feel confident that my hypothesis may be correct, and that school spending may, in fact, be a factor in driving up a state’s GDP.
-After running a regression with the “lm()” function I became more confident yet that my hypothesis did contain some sort of truth. The intercept is about 9125. This means that if school spending per student (the Y-axis) were <code>$</code>0, then a state’s GDP per capita (the X-axis) could be predicted to be <code>$</code>9125. The main coefficient of interest is about 2.93. This means that for each dollar (<code>$</code>1) that is put towards school funding per student, the GDP per capita of a state can be predicted to increase by about <code>$</code>2.93. This relationship strengthens the claim I make in my hypothesis.
-Using the “summary()” function, I was able to concretely prove that there was a significance to my graph and argument as a whole. The P-Value was calculated to be 1.153e-09 (or 0.00000000115). Statistical significance, at least for the data we have been analyzing, is achieved when the p-value is below 0.05. So, since the value is far below 0.05, I can say that there is a much higher than 95% chance that the observations documented were due to chance. Based on the P-Value, the data is strongly statistically significant. Additionally, I found the multiple R-squared value to be 0.53. This means that 53% of the variation is explained by school spending.
-While there is significance and correlation, I am very hesitant to say that there is causality in this graph. While there is a relationship between school spending and GDP per capita, there are so many different explanations and factors that could be influencing both of these variables. First, I cannot be sure that the relationship is opposite to what I have claimed: it may be that GDP per capita is actually driving up school spending. Additionally, there are a ton of potential confounders with these variables. Within a state, there are so many other things (like political parties in power, global politics, geographic location, urban-rural divide, job market, etc., etc.) that contribute greatly to a state’s GDP. Using the graph’s multiple R-squared value, which is 0.53, this gap in my data is quantified. Only 53% of the variance in the graph attributes school spending to growth in GDP, leaving 47% of the variance susceptible to other variables. It would be short sighted to say that school spending directly causes GDP per capita to rise.</p>
-<p>Using the graph’s multiple R-squared value, which is 0.53, this gap in my data is quantified. Only 53% of the variance in the graph attributes school spending to growth in GDP, leaving 47% of the variance susceptible to other variables.
-IS THIS RIGHT?</p>
-<p>If there are things that impact Y and X, then it cannot be said to be causal. Omitted variables = violation of exogeneity</p>
-<p>Conclusion section: 1 paragraph (i) summarizing results and assessing the extent to which you find support for your hypothesis; (ii) describing limitations of the analysis and threats to inference (missing data, confounding, etc), and stating how you could improve your analysis if you had more time/money. (2pts)</p>
-<p>In conclusion, I believe I’ve found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state’s GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by <code>$</code>2.93. The second key finding was that the relationship between a state’s school funding and that state’s GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state’s GDP, and the P-Value proves that this impact is not due to chance.
-While I do not believe that there is room for confounding values within the dataset, there certainly are missing values that disallow me from making causal inferences. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect have an impact on a state’s GDP. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data’s strong correlation and P-Value.
-Knowing what I know now, I would really like to add more variables into my dataset. It is super hyperfocused right now on just these two variables because of the way I manually pieced the dataset together.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
