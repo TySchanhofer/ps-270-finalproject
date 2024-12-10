@@ -9,30 +9,26 @@ output:
 
 
 
-## Project thoughts
+## Introduction
 
-I am interested in exploring data related to voting in this year's Wisconsin Senate election. I want to look at it this year especially because of the concurrent Presidential election. I wonder if there are some interesting effects of the bigger, national election happening at the same time.
-## Proposal Paragraph
-https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14
-https://www.kaggle.com/datasets/davidbroberts/us-gdp-by-state-19972020
-  (I am moving away from my thoughts above) 
+The guiding question for this research project was, does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's GDP per capita? I hypothesized that states that put more money towards educating its students would produce a workforce that is made up of higher earners, which would lead to a higher GDP per capita. This area of research is important because it gives some insight into the importance of education, as it relates to economic outcomes in a person’s life. If my hypothesis is proven correct, it could mean that school funding has an impact in improving quality of life (because by virtually all accounts, a person with a stable income is better off than an impoverished person). By bringing attention to this idea, it could lead to a more intense focus on school funding and avoiding cutting school budgets or taking other adverse actions that could eventually worsen economic outcomes of state residents.
   
-  Does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's GDP per capita? I hypothesize that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita. I expect states that put more money towards educating its youth will then produce a workforce that is made up of more high earners. Additionally, I believe these states will also attract high earners from elsewhere, which would also raise the GDP per capita. My explanatory value is the amount of money each state spends per student. My outcome value is the GDP per capita for each state. If I find that greater funding for schools per student is accompanied by greater GDP per capita for a state, then my hypothesis will be proven. If I find that there is little or reverse correlation between a state's funding for schools, then my hypothesis will be disproven. When I run a regression of a state's GDP with school funding as the indicator, a positive, significant coefficient would indicate support for my hypothesis.
-  
+
+
+
+## Intial Code Scrubbing and Organizing
 
 ```{r}
 library(tidyverse)
 library(ggplot2)
 ```
 
-  
-## Data Upload
+
 ```{r}
 rawgdp <- read_csv("data/bea-gdp-by-state.csv")
 rawschools <- read_csv("data/ELSI_csv_export_finance2.csv")
 ```
 
-## Data Cleaning
 
 ```{r}
 gdp <- rawgdp |>
@@ -50,7 +46,12 @@ schools
 ```
 
 
-## Initial Graph
+## Data Section
+
+My sources for this graph are directly from the US government. The data for school spending was compiled by the US Census Bureau. For GDP, I used data compiled from the US Bureau of Economic Analysis; this Bureau uses local, state, and federal data to monitor and release the most reliable data on GDP. Using data from these two reliable, government sources has been very helpful because of the groups’ access to census data and tax records, which allows their numbers to paint a really holistic picture of school spending and GDP variables.
+The independent variable is a state’s school funding per student. The dependent variable, and my variable of interest, is a state’s GDP per capita. Below, the variable of interest is represented by a bar plot that shows the frequency of GDP values among the 50 states (and the District of Columbia). The bar graph shows a clear clustering of GDP per capita between `$`35,000 to `$`70,000, with the District of Columbia being an outlier at around `$`158,000. 
+HOW ARE THEY MEASURED??
+
 
 ```{r}
 ggplot(data = gdp,
@@ -62,14 +63,14 @@ geom_histogram() +
 
 
 
-## Combining the Datasets
+## Analysis
 ```{r}
 gdp_schools <- left_join(gdp, schools, by = "Area")
 
 gdp_schools
 ```
 
-## Analysis Graph
+
 
 ```{r}
 graph_1 <- ggplot(data = gdp_schools,
@@ -87,8 +88,6 @@ graph_1 <- ggplot(data = gdp_schools,
 graph_1
 ```
 
-This first combined graph has shown some promising results with regard to my hypothesis. I guessed that as a state's educational funding rises (shown here through the amount of dollars spent per student), its GDP per capita would rise as well. This graph that combines public school funding information from National Center for Educational Statistics and income information from the Bureau of Economic Analysis, begins to show that there seems to be a correlation between the two factors.
-
 
 ```{r}
 fit.student <- lm(`GDP per Capita` ~ `Spending per Student`, data = gdp_schools)
@@ -97,10 +96,20 @@ fit.student |>
   summary()
 ```
 
-2.927 Rev per pupil = if we increase school spending (per pupil) by `$`1 (check this value), then we can predict GDP goes up $2.927.
-9125 Intercept = if school spending is `$`0, then we can predict that GDP will be `$`9125
+
+Based on the scatter plot graph alone, it is clear that there is a noticeable, positive correlation between the school spending and state GDP per capita variables. While there are a few outliers (especially the Washington D.C. point, which is cropped out of this graph), most points are clustered relatively close to the trendline that has been added to the graph. Just by giving it an eye test, I am starting to feel confident that my hypothesis may be correct, and that school spending may, in fact, be a factor in driving up a state's GDP.
+  After running a regression with the "lm()" function I became more confident yet that my hypothesis did contain some sort of truth. The intercept is about 9125. This means that if school spending per student (the Y-axis) were `$`0, then a state's GDP per capita (the X-axis) could be predicted to be `$`9125. The main coefficient of interest is about 2.93. This means that for each dollar (`$`1) that is put towards school funding per student, the GDP per capita of a state can be predicted to increase by about `$`2.93. This relationship strengthens the claim I make in my hypothesis.
+  Using the "summary()" function, I was able to concretely prove that there was a significance to my graph and argument as a whole. The P-Value was calculated to be 1.153e-09 (or 0.00000000115). Statistical significance, at least for the data we have been analyzing, is achieved when the p-value is below 0.05. So, since the value is far below 0.05, I can say that there is a much higher than 95% chance that the observations documented were due to chance. Based on the P-Value, the data is strongly statistically significant. Additionally, I found the multiple R-squared value to be 0.53. This means that 53% of the variation is explained by school spending.
+  While there is significance and correlation, I am very hesitant to say that there is causality in this graph. While there is a relationship between school spending and GDP per capita, there are so many different explanations and factors that could be influencing both of these variables. First, I cannot be sure that the relationship is opposite to what I have claimed: it may be that GDP per capita is actually driving up school spending. Additionally, there are a ton of potential confounders with these variables. Within a state, there are so many other things (like political parties in power, global politics, geographic location, urban-rural divide, job market, etc., etc.) that contribute greatly to a state's GDP. Using the graph's multiple R-squared value, which is 0.53, this gap in my data is quantified. Only 53% of the variance in the graph attributes school spending to growth in GDP, leaving 47% of the variance susceptible to other variables. It would be short sighted to say that school spending directly causes GDP per capita to rise.
 
 
+
+
+## Conclusion
+
+ In conclusion, I believe I've found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by `$`2.93. The second key finding was that the relationship between a state's school funding and that state's GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state's GDP, and the P-Value proves that this impact is not due to chance.
+  While I do not believe that there is room for confounding values within the dataset, there certainly are missing values that disallow me from making causal inferences. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect have an impact on a state's GDP. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data's strong correlation and P-Value.
+  Knowing what I know now, I would really like to add more variables into my dataset.  It is super hyperfocused right now on just these two variables because of the way I manually pieced the dataset together.
 
 
 
@@ -133,6 +142,9 @@ Using the graph's multiple R-squared value, which is 0.53, this gap in my data i
 IS THIS RIGHT?
 
 
+If there are things that impact Y and X, then it cannot be said to be causal. Omitted variables = violation of exogeneity
+
+
 
 
 
@@ -142,7 +154,7 @@ Conclusion section: 1 paragraph (i) summarizing results and assessing the extent
 
   In conclusion, I believe I've found two key values in this research that support my hypothesis. At the outset of this project, predicted that the greater amount of funding per student that is put towards education, the greater a state's GDP per capita will be. The first key finding that supports this assertion was the positive correlation I found. The graph showed that for every dollar that is put towards school funding per student, the GDP per capita of a state can be predicted to rise by `$`2.93. The second key finding was that the relationship between a state's school funding and that state's GDP per capita has a P-Value of 0.00000000115. This value, when compared to an alpha value of 0.05, is highly statistically significant. The correlation proves that school funding makes an impact on a state's GDP, and the P-Value proves that this impact is not due to chance.
   While I do not believe that there is room for confounding values within the dataset, there certainly are missing values that disallow me from making causal inferences. Factors that I mentioned in the data analysis section, especially things like parties in power and the urban-rural divide, I suspect have an impact on a state's GDP. By not including these factors, it is impossible for me to come to a causal conclusion, despite the data's strong correlation and P-Value.
-  Knowing what I know now, I would really like to add more variables into my dataset.  
+  Knowing what I know now, I would really like to add more variables into my dataset.  It is super hyperfocused right now on just these two variables because of the way I manually pieced the dataset together.
 
 
 
