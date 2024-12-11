@@ -8,13 +8,9 @@ output:
 ---
 
 
-
 ## Introduction
 
 The guiding question for this research project was, does funding for an American state's elementary, middle, and high schools have correlation/a causal relationship with a state's GDP per capita? I hypothesized that states that put more money towards educating its students would produce a workforce that is made up of higher earners, which would lead to a higher GDP per capita. This area of research is important because it gives some insight into the importance of education, as it relates to economic outcomes in a person’s life. If my hypothesis is proven correct, it could mean that school funding has an impact in improving quality of life (because by virtually all accounts, a person with a stable income is better off than an impoverished person). By bringing attention to this idea, it could lead to a more intense focus on school funding and avoiding cutting school budgets or taking other adverse actions that could eventually worsen economic outcomes of state residents.
-  
-
-
 
 ## Intial Code Scrubbing and Organizing
 
@@ -47,11 +43,10 @@ schools <- rawschools |>
 
 ## Data Section
 
-  My sources for this graph are directly from the US government. The data for school spending was compiled by the US Census Bureau. For GDP, I used data compiled from the US Bureau of Economic Analysis; this Bureau uses local, state, and federal data to monitor and release the most reliable data on GDP. Using data from these two reliable, government sources has been very helpful because of the groups’ access to census data and tax records, which allows their numbers to paint a really holistic picture of school spending and GDP variables.
+  My sources for this graph are directly from the US government. The data for school spending was compiled by the US Census Bureau. A 14 page survey is sent to every public school, and all information pertaining to spending and funds received from the state and federal government is compiled. For GDP, I used data compiled from the US Bureau of Economic Analysis; this Bureau uses local, state, and federal tax data to monitor and release the most reliable data on GDP. Using data from these two reliable, government sources has been very helpful because of the groups’ access to census data and tax records, which allows their numbers to paint a really holistic picture of school spending and GDP variables.
   
   The independent variable is a state’s school funding per student. The dependent variable, and my variable of interest, is a state’s GDP per capita. Below, the variable of interest is represented by a bar plot that shows the frequency of GDP values among the 50 states (and the District of Columbia). The bar graph shows a clear clustering of GDP per capita between `$`35,000 to `$`70,000, with the District of Columbia being an outlier at around `$`158,000. 
 
-Find more info on school numbers (I'm guessing this is public knowledge)
 
 Links: https://www.kaggle.com/datasets/thedevastator/u-s-public-school-system-finances-esec14 and https://www.kaggle.com/datasets/solorzano/gdp-per-capita-in-us-states
 
@@ -62,8 +57,6 @@ ggplot(data = gdp,
 geom_histogram() +
   labs(title = "GDP per Capita Across the US")
 ```
-
-
 
 
 ## Analysis
